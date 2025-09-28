@@ -6,8 +6,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'your-secret-key'
 DEBUG = True
+
+# Allow all hosts (works with any Render deployment)
 ALLOWED_HOSTS = ["*"]
 
+# CSRF trusted origins (optional, needed for HTTPS forms)
+CSRF_TRUSTED_ORIGINS = [
+    "https://e-commerce-backend-6.onrender.com",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,9 +68,9 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-
+STATIC_ROOT = BASE_DIR / "staticfiles"  # required for Render
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
