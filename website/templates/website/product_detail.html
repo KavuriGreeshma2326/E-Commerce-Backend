@@ -1,0 +1,15 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h2>{{ product.name }}</h2>
+{% if product.image %}
+<img src="{{ product.image.url }}" style="width:300px;height:200px;object-fit:cover;">
+{% endif %}
+<p>{{ product.description }}</p>
+<p><b>Price:</b> ₹ {{ product.price }}</p>
+<p><b>Stock:</b> {{ product.stock }}</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+    <button type="submit">Add to Cart</button>
+</form>
+{% endblock %}

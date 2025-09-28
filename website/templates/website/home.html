@@ -1,0 +1,23 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2>Featured Products</h2>
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product-card">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p class="price">₹ {{ product.price }}</p>
+                <a href="{% url 'product_detail' product.id %}" class="btn-view">View</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

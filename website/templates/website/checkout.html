@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="checkout-container">
+    <h2>Order Confirmed ✅</h2>
+    <p>Thank you for shopping with us!</p>
+    <a href="{% url 'product_list' %}" class="btn-continue">Continue Shopping</a>
+</div>
+{% endblock %}

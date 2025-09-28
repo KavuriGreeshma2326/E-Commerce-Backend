@@ -1,0 +1,55 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+
+    {% if cart_items %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.product.price }}</td>
+                    <td>₹{{ item.product.price|floatformat:2|add:item.quantity }}</td>
+                    <td>
+                        <form method="post" action="{% url 'checkout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-checkout">Proceed to Checkout</button>
+                        </form>
+                        <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-remove">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <p><strong>Total Items:</strong> {{ total_items }}</p>
+            <p><strong>Total Price:</strong> ₹{{ total_price }}</p>
+
+            <form method="post" action="{% url 'checkout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-checkout">Proceed to Checkout</button>
+            </form>
+        </div>
+
+    {% else %}
+        <p>Your cart is empty. <a href="{% url 'product_list' %}">Continue shopping</a></p>
+    {% endif %}
+</div>
+{% endblock %}

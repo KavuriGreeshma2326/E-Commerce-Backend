@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}" style="color:white;margin-right:20px;">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'cart' %}" style="color:white;margin-right:20px;">Cart</a>
+            <a href="{% url 'logout' %}" style="color:white;">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" style="color:white;margin-right:20px;">Login</a>
+            <a href="{% url 'signup' %}" style="color:white;">Signup</a>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>© 2025 My E-commerce</p>
+    </footer>
+</body>
+</html>
